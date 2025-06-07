@@ -53,18 +53,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
   <title>Verify OTP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="d-flex align-items-center justify-content-center" style="height:100vh;">
-  <form method="POST" class="p-4 border rounded shadow-sm w-25">
-    <h4>Enter OTP</h4>
-    <?php if (isset($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
-    <p>Your OTP is: <strong><?php echo $_SESSION['otp']; ?></strong></p>
-    <div class="mb-3">
-      <label>OTP</label>
-      <input type="text" name="otp" class="form-control" required pattern="\d{4}" maxlength="4" minlength="4" title="Please enter a valid 4-digit OTP">
+<body class="bg-light">
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="w-100 w-sm-75 w-md-50 w-lg-25 bg-white p-4 rounded shadow">
+      <form method="POST">
+        <h4 class="mb-3 text-center">Enter OTP</h4>
+        
+        <?php if (isset($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
+
+        <div class="mb-3 text-center">
+          <small class="text-muted">Your OTP is:</small><br>
+          <strong><?php echo $_SESSION['otp'] ?? 'N/A'; ?></strong>
+        </div>
+
+        <div class="mb-3">
+          <label for="otp" class="form-label">OTP</label>
+          <input type="text" name="otp" id="otp" class="form-control" required pattern="\d{4}" maxlength="4" minlength="4" title="Please enter a valid 4-digit OTP">
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Verify</button>
+      </form>
     </div>
-    <button type="submit" class="btn btn-success w-100">Verify</button>
-  </form>
+  </div>
+
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
